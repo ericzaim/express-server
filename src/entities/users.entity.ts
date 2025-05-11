@@ -1,13 +1,19 @@
 import { Entity, BaseEntity, PrimaryGeneratedColumn, Column } from 'typeorm'
 
 @Entity()
-export default class Task extends BaseEntity {
+export default class User extends BaseEntity {
   @PrimaryGeneratedColumn()
-  id!: number
+  id!: string
 
   @Column()
-  title!: string
+  name!: string
 
-  @Column({default: false})
-  completed!: boolean
+  @Column()
+  email!: string
+
+  @Column()
+  password!: string
+
+  @Column({array:true})
+  tasksID!: string
 }
