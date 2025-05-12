@@ -1,5 +1,6 @@
 import { DataSource } from 'typeorm'
 import dotenv from 'dotenv'
+import { join } from 'path'
 
 dotenv.config() // carrega as variáveis de ambiente do arquivo .env
 
@@ -7,7 +8,7 @@ const dataBase = new DataSource({
   type: 'mongodb',//definir qual bd Usar
   database: process.env.DATABASE,
   entities: [
-    './src/entities/*.ts'
+    join(__dirname, '..', 'entities/*.{ts,js}')
   ],
   logging: true, // log das queries executadas
   synchronize: true // cria as tabelas automaticamente
