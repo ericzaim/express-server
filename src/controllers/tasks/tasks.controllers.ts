@@ -42,7 +42,7 @@ export default class TaskController {
     if(!id || id == ''){
       return res.status(400).json({error:'ID is Required'})
     }
-    const task = await Task.findOneBy({id:String(id)})
+    const task = await Task.findOneBy({id:Number(id)})
     return res.json(task)
   }
   
@@ -51,7 +51,7 @@ export default class TaskController {
     if(!userID || userID == '') {
       return res.status(400).json({ error: 'User ID is Required' })
     }
-    const tasks = await Task.find({ where: { userID: String(userID) } })
+    const tasks = await Task.find({ where: { userID: Number(userID) } })
     if (tasks.length === 0) {
       return res.status(404).json({ error: 'No tasks found for this user' })
     }
@@ -68,7 +68,7 @@ export default class TaskController {
     if(!id || id=='') {
       return res.status(400).json({ error: 'ID is Required' })
     }
-    const task = await Task.findOneBy({id: String(id)})
+    const task = await Task.findOneBy({id: Number(id)})
     if (!task) {
       return res.status(404).json({ error: 'Task not found' })
     }
@@ -89,7 +89,7 @@ export default class TaskController {
       return res.status(400).json({ error: 'ID is Required' })
     }
 
-    const task = await Task.findOneBy({id: String(id)})
+    const task = await Task.findOneBy({id: Number(id)})
     if (!task) {
       return res.status(404).json({ error: 'Task not found' })
     }
@@ -117,7 +117,7 @@ export default class TaskController {
       return res.status(400).json({ error: 'ID is Required' })
     }
 
-    const task = await Task.findOneBy({id: String(id)})
+    const task = await Task.findOneBy({id: Number(id)})
     if (!task) {
       return res.status(404).json({ error: 'Task not found' })
     }

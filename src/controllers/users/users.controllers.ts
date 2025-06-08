@@ -27,7 +27,7 @@ export default class UsersController{
       if(!id || id == ''){
         return res.status(400).json({error:'ID is Required'})
       }
-      const user = await User.findOneBy({id:String(id)})
+      const user = await User.findOneBy({id:Number(id)})
       return res.status(200).json(user)
     }
     
@@ -59,7 +59,7 @@ export default class UsersController{
         return res.status(400).json({ error: 'Insira pelo menos um valor para trocar' })
       }
 
-      const user = await User.findOneBy({id:String(id)})
+      const user = await User.findOneBy({id:Number(id)})
 
       if(!user){
         return res.status(404).json({error:'User not found'})
@@ -78,7 +78,7 @@ export default class UsersController{
       if(!id || id == ''){
         return res.status(400).json({error:'ID is Required'})
       }
-      const user = await User.findOneBy({id:String(id)})
+      const user = await User.findOneBy({id:Number(id)})
 
       if(!user){
         return res.status(404).json({error:'User not found'})
