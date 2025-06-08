@@ -6,6 +6,7 @@ dotenv.config() // carrega as variáveis de ambiente do arquivo .env
 
 const dataBase = new DataSource({
   type: 'postgres',
+  url: process.env.DATABASE_URL,
   database: process.env.DATABASE,
   username: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
@@ -14,8 +15,8 @@ const dataBase = new DataSource({
   entities: [
     join(__dirname, '..', 'entities/*.{ts,js}')
   ],
-  logging: true, // log das queries executadas
-  synchronize: true // cria as tabelas automaticamente
+  logging: true,
+  synchronize: true
 })
 
 dataBase.initialize()

@@ -3,7 +3,7 @@ import { Entity, BaseEntity, PrimaryGeneratedColumn, Column } from 'typeorm'
 @Entity()
 export default class Tasks extends BaseEntity {
   @PrimaryGeneratedColumn()
-  id!: string
+  id!: number
 
   @Column()
   title!: string
@@ -15,12 +15,12 @@ export default class Tasks extends BaseEntity {
   completed!: boolean
 
   @Column()
-  userID!:string
+  userID!:number
 
-  @Column({ type: 'time' })
-  time!: string
+  @Column({ type: 'timestamp' })
+  time!: Date
 
-  @Column({default:false})
-  isDaily!:boolean
+  @Column({ default: false })
+  isDaily!: boolean
 
 }
