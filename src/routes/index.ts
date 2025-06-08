@@ -4,7 +4,7 @@ import userRoutes from './users/users.routes'
 
 const routes = Router({ caseSensitive: true })
 
-
+routes.use(`/`,routes)
 routes.use('/users', userRoutes)
 routes.use('/tasks', taskRoutes)
 
