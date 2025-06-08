@@ -45,6 +45,18 @@ export default class TaskController {
     const task = await Task.findOneBy({id:String(id)})
     return res.json(task)
   }
+  
+  static async findByUser (req: Request, res: Response) {
+    const { userID } = req.params 
+    if(!userID || userID == '') {
+      return res.status(400).json({ error: 'User ID is Required' })
+    }
+    const tasks = await Task.find({ where: { userID: String(userID) } })
+    if (tasks.length === 0) {
+      return res.status(404).json({ error: 'No tasks found for this user' })
+    }
+    return res.json(tasks)
+  }
 /**
  * Deleta Tasks
  * @param req 
