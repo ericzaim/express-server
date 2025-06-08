@@ -7,9 +7,9 @@ export default class TaskController {
    * @param res 
    * @returns 
    */
-  static async store (req:Request,res:Response, next: NextFunction){
+  static async store (req:Request,res:Response){
 
- const { title, completed, description,userID,time,isDaily } = req.body
+  const { title, completed, description,userID,time,isDaily } = req.body
     if (!title) {
       return res.status(400).json({ error: 'Nome da task é obrigatório' })
     }
@@ -26,10 +26,9 @@ export default class TaskController {
     return res.status(201).json(task)
 }
 
-  static async index (req: Request, res: Response) {
+  static async findAll(req: Request, res: Response) {
   const tasks = await Task.find()
   return res.json(tasks)
-
 }
 /**
  * Mostra tasks
@@ -37,8 +36,7 @@ export default class TaskController {
  * @param res 
  * @returns 
  */
-
-  static async show (req:Request,res:Response){
+  static async findOneById (req:Request,res:Response){
     const { id } = req.params
 
     if(!id || id == ''){
@@ -55,16 +53,13 @@ export default class TaskController {
  */
     static async delete (req: Request, res: Response) {
     const { id } = req.params
-
     if(!id || id=='') {
       return res.status(400).json({ error: 'ID is Required' })
     }
-
     const task = await Task.findOneBy({id: String(id)})
     if (!task) {
       return res.status(404).json({ error: 'Task not found' })
     }
-
     await task.remove()
     return res.status(204).json()
   }
@@ -76,7 +71,7 @@ export default class TaskController {
    */
     static async change (req: Request, res: Response) {
     const { id } = req.params
-    const { title, completed } = req.body
+    const { title, completed, description,time,isDaily } = req.body
 
     if(!id || id == '') {
       return res.status(400).json({ error: 'ID is Required' })
@@ -87,8 +82,11 @@ export default class TaskController {
       return res.status(404).json({ error: 'Task not found' })
     }
 
-    task.title = title || task.title
-    task.completed = (completed === undefined) ? task.completed : completed
+    task.title = title
+    task.completed = completed
+    task.description = description
+    task.time = time
+    task.isDaily = isDaily
     await task.save()
 
     return res.json(task)
@@ -113,11 +111,10 @@ export default class TaskController {
     }
 
     task.title = title || task.title
-    task.completed = (completed === undefined) ? task.completed : completed
+    task.completed = completed || task.completed
     task.description = description || task.description
-    task.time = (task.time === time) ? task.time : task.time = time
-    task.isDaily = (task.isDaily === isDaily) ? task.isDaily : !task.isDaily
-
+    task.time = time || task.time 
+    task.isDaily = isDaily || task.isDaily
     await task.save()
 
     return res.json(task) // Vamos retornar a task atualizada

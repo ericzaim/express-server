@@ -1,7 +1,7 @@
 import { Entity, BaseEntity, PrimaryGeneratedColumn, Column } from 'typeorm'
 
 @Entity()
-export default class Task extends BaseEntity {
+export default class Tasks extends BaseEntity {
   @PrimaryGeneratedColumn()
   id!: string
 
@@ -17,8 +17,8 @@ export default class Task extends BaseEntity {
   @Column()
   userID!:string
 
-  @Column()
-  time!: number
+  @Column({ type: 'time' })
+  time!: string
 
   @Column({default:false})
   isDaily!:boolean

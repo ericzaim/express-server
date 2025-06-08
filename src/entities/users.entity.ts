@@ -1,7 +1,7 @@
 import { Entity, BaseEntity, PrimaryGeneratedColumn, Column } from 'typeorm'
 
 @Entity()
-export default class User extends BaseEntity {
+export default class Users extends BaseEntity {
   @PrimaryGeneratedColumn()
   id!: string
 
@@ -13,7 +13,4 @@ export default class User extends BaseEntity {
 
   @Column()
   password!: string
-
-  @Column({array:true})
-  tasksID!: string
 }
